@@ -1,10 +1,9 @@
 <?php 
 
 
-
 $title = "Transactions";
 function get_content() {
-require '../controllers/connection.php';
+require '../models/Model.php';
  ?>
 
 
@@ -15,10 +14,10 @@ require '../controllers/connection.php';
 
 		if(!$_SESSION['user_details']['isAdmin']) {
 			$query = "SELECT * FROM orders WHERE user_id = $user_id";
-			$orders = mysqli_query($cn, $query);
+			$orders = Model::get_db($query);
 		} else {
 			$query = "SELECT * FROM orders";
-			$orders = mysqli_query($cn, $query);
+			$orders = Model::get_db($query);
 		}
 
 		foreach($orders as $id => $order):
@@ -42,12 +41,12 @@ require '../controllers/connection.php';
 			<tbody>
 				<?php 
 					$query = "SELECT * FROM item_order WHERE order_id = $orderId";
-					$item_orders = mysqli_query($cn, $query);
+					$item_orders = Model::get_db($query);
 					$total = $order['total'];
 					foreach($item_orders as $id => $item_order):
 						$item_id = $item_order['item_id'];
 						$query = "SELECT * FROM items WHERE id = $item_id";
-						$item_name = mysqli_fetch_assoc(mysqli_query($cn, $query));
+						$item_name = mysqli_fetch_assoc(Model::get_db($query));
 				?>
 				<tr>
 					<td><?php echo $item_name['name'] ; ?></td>

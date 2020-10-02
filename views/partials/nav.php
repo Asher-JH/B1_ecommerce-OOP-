@@ -12,7 +12,7 @@
       <?php if(isset($_SESSION['user_details']) && $_SESSION['user_details']['isAdmin'])://if admin is logged in ?>
       <a class="nav-link" href="/views/forms/add_items.php">Add Item</a>
       <a class="nav-link" href="/views/transactions.php">Transactions</a>
-      <a class="nav-link" href="/controllers/logout.php">Logout</a>
+      <a class="nav-link" href="/routes/logout.php">Logout</a>
       <?php elseif(isset($_SESSION['user_details']) && !$_SESSION['user_details']['isAdmin'])://if user is logged in ?>
       <a class="nav-link" href="/views/cart.php">Cart <span class="badge badge-info" id="cart_count">
         <?php 
@@ -24,7 +24,7 @@
          ?>
       </span></a>
       <a class="nav-link" href="/views/transactions.php">Transactions</a>
-      <a class="nav-link" href="/controllers/logout.php">Logout</a>
+      <a class="nav-link" href="/routes/logout.php">Logout</a>
       <?php else: //else no one is logged in ?>
       <a class="nav-link" href="/views/forms/login.php">Login</a>
       <a class="nav-link" href="/views/forms/register.php">Register</a>

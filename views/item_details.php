@@ -1,10 +1,10 @@
 <?php 
 
 	function get_content() {
-	require_once '../controllers/connection.php';
+	require_once '../models/Model.php';
 	$id = $_GET['id'];
 	$query = "SELECT * FROM items WHERE id = $id";
-	$item = mysqli_fetch_assoc(mysqli_query($cn, $query));
+	$item = mysqli_fetch_assoc(Model::get_db($query));
 
 
 
@@ -39,7 +39,7 @@
  			</div>
  			<div class="modal-footer">
  				<button data-dismiss="modal" type="button" class="btn btn-secondary">Close</button>
- 				<a href="../controllers/delete_item.php?id=<?php echo $item['id']; ?>" class="btn btn-danger">
+ 				<a href="../routes/delete_item.php?id=<?php echo $item['id']; ?>" class="btn btn-danger">
  					Delete
  				</a>
  			</div>

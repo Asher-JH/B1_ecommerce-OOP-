@@ -2,15 +2,15 @@
 	require_once '../../middleware/auth.php';
 	$title = "Add Item";
 	function get_content() {
-	require '../../controllers/connection.php';
+	require '../../models/Model.php';
 	$query = "SELECT * FROM categories";
-	$categories = mysqli_query($cn, $query);
+	$categories = Model::get_db($query);
  ?>
 
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 mx-auto py-4">
-			<form method="POST" action="/controllers/add_item.php" enctype="multipart/form-data">
+			<form method="POST" action="/routes/add_item.php" enctype="multipart/form-data">
 				<div class="form-group">
 					<label>Name</label>
 					<input type="text" name="product_name" class="form-control">

@@ -4,7 +4,7 @@
  ?>
 
 
- <form class="col-md-6 mx-auto py-5" method="POST" action="/controllers/login.php">
+ <form class="col-md-6 mx-auto py-5" method="POST" action="/routes/login.php">
  	<div class="form-group">
  		<label>Username</label>
  		<input type="text" name="username" class="form-control">

@@ -1,10 +1,23 @@
 <?php
 $title = "Catalog";
 function get_content() {
-	require 'controllers/connection.php';
+	require 'models/Model.php';
 	$query = "SELECT * FROM items";
-	$items = mysqli_query($cn, $query);
+	if(isset($_POST['categories'])) {
+		$sort_value = $_POST['categories'];
+		$query = "SELECT * FROM items WHERE category_id = $sort_value";
+	}
+	$items = Model::get_db($query);
 	?>
+
+	<form method="POST" action="#">
+		<select name="categories">
+			<option value="1">Breakfast</option>
+			<option value="2">Lunch</option>
+			<option value="3">Dinner</option>
+		</select>
+		<button class="btn btn-primary">Sort</button>
+	</form>
 
 	<div class="container">
 		<h2 class="py-5">Catalog</h2>
@@ -44,7 +57,7 @@ function get_content() {
 			let formBody = new FormData;
 			formBody.append('id', id);
 			formBody.append('quantity', quantity);
-			fetch('controllers/add_to_cart.php', {
+			fetch('routes/add_to_cart.php', {
 				method: 'POST',
 				body: formBody
 			})

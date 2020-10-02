@@ -2,18 +2,18 @@
 	$title = "Edit Item";
 	function get_content() {
 	$id = $_GET['id'];
-	require '../../controllers/connection.php';
+	require '../../models/Model.php';
 	$queryAll = "SELECT * FROM items WHERE id = $id";
-	$item = mysqli_fetch_assoc(mysqli_query($cn, $queryAll));
+	$item = mysqli_fetch_assoc(Model::get_db($queryAll));
 	$queryCategories = "SELECT * FROM categories";
-	$categories = mysqli_query($cn, $queryCategories);
+	$categories = Model::get_db($queryCategories);
  ?>
 
 <div class="container">
 	<h2 class="font-weight-bold py-3">Edit <?php echo $item['name']; ?> </h2>
 	<div class="row">
 		<div class="col-md-6 mx-auto py-4">
-			<form method="POST" action="/controllers/edit_item.php" enctype="multipart/form-data">
+			<form method="POST" action="/routes/edit_item.php" enctype="multipart/form-data">
 				<div class="form-group">
 					<label>Name</label>
 					<input type="text" name="product_name" class="form-control" value="<?php echo $item['name'] ?>">

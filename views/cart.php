@@ -1,10 +1,9 @@
 <?php 
 
 
-
 $title = "Cart";
 function get_content() {
-require '../controllers/connection.php';
+require '../models/Model.php';
 if(isset($_SESSION['cart']) && count($_SESSION['cart'])):
  ?>
 
@@ -26,7 +25,7 @@ if(isset($_SESSION['cart']) && count($_SESSION['cart'])):
 				$total = 0;
 				foreach($_SESSION['cart'] as $id => $quantity): 
 					$query = "SELECT * FROM items WHERE id = $id";
-					$item = mysqli_fetch_assoc(mysqli_query($cn, $query));
+					$item = mysqli_fetch_assoc(Model::get_db($query));
 					$subtotal = $item['price'] * $quantity;
 					$total += $subtotal;
 				?>
@@ -34,20 +33,20 @@ if(isset($_SESSION['cart']) && count($_SESSION['cart'])):
 					<td><?php echo $item['name']; ?></td>
 					<td><?php echo $item['price']; ?></td>
 					<td>
-						<form method="POST" action="/controllers/update_cart.php">
+						<form method="POST" action="/routes/update_cart.php">
 							<input type="hidden" name="id" value="<?php echo $item['id']; ?>">
 							<input type="number" name="quantity" value="<?php echo $quantity; ?>" class="form-control quantity_input">
 						</form>
 					</td>
 					<td><?php echo number_format($subtotal, 2); ?></td>
 					<td>
-						<a href="/controllers/delete_cart_item.php?id=<?php echo $id ?>" class="btn btn-danger">Delete</a>
+						<a href="/routes/delete_cart_item.php?id=<?php echo $id ?>" class="btn btn-danger">Delete</a>
 					</td>
 				</tr>
 			<?php endforeach; ?>
 			<tr>
 				<td>
-					<a href="/controllers/empty_cart.php" class="btn btn-danger">Empty Cart</a>
+					<a href="/routes/empty_cart.php" class="btn btn-danger">Empty Cart</a>
 				</td>
 				<td>
 					<button data-toggle="modal" data-target="#checkout_modal" class="btn btn-success">Checkout</button>
@@ -63,7 +62,7 @@ if(isset($_SESSION['cart']) && count($_SESSION['cart'])):
 								</div>
 								<div class="modal-footer">
 									<button class="btn btn-secondary" data-dismiss='modal'>Close</button>
-									<a href="/controllers/checkout.php" class="btn btn-success">Checkout</a>
+									<a href='/routes/checkout.php?isPaypal=false' class="btn btn-success">Checkout</a>
 								</div>
 							</div>
 						</div>
@@ -91,7 +90,7 @@ if(isset($_SESSION['cart']) && count($_SESSION['cart'])):
 			onApprove: function(data, actions) {
 				return actions.order.capture().then(function(details) {
 					alert('Transaction completed by ' + details.payer.name.given_name);
-					fetch('/controllers/checkout.php')
+					fetch('/routes/checkout.php?isPaypal=true')
 				})
 			}
 		}).render('#paypal-button-container');</script>

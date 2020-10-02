@@ -4,7 +4,7 @@
  ?>
 
 
- <form class="col-md-6 mx-auto py-5" method="POST" action="/controllers/add_user.php" enctype="multipart/form">
+ <form class="col-md-6 mx-auto py-5" method="POST" action="/routes/add_user.php" enctype="multipart/form">
 	<div class="form-group">
 		<label>Firstname</label>
 		<input type="text" name="firstname" class="form-control">
