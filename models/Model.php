@@ -3,32 +3,32 @@
 
 	class Model implements Database {
 		public static function get_db($query) {
-			// $host = 'localhost';
-			// $username = 'root';
-			// $password = '';
-			// $db = 'b1_ecom';
+			$host = 'localhost';
+			$username = 'root';
+			$password = '';
+			$db = 'b1_ecom';
 
 			// Online Database
-			$host = 'db4free.net';
-			$username = 'qazwsxedcrfv123';
-			$password = 'qwerty123';
-			$db = 'b1ecomasher';
+			// $host = 'db4free.net';
+			// $username = 'qazwsxedcrfv123';
+			// $password = 'qwerty123';
+			// $db = 'b1ecomasher';
 
 			$cn = mysqli_connect($host, $username, $password, $db);
 			return mysqli_query($cn, $query);
 		}
 
 		public static function get_cn() {
-			// $host = 'localhost';
-			// $username = 'root';
-			// $password = '';
-			// $db = 'b1_ecom';
+			$host = 'localhost';
+			$username = 'root';
+			$password = '';
+			$db = 'b1_ecom';
 
 			// Online Database
-			$host = 'db4free.net';
-			$username = 'qazwsxedcrfv123';
-			$password = 'qwerty123';
-			$db = 'b1ecomasher';
+			// $host = 'db4free.net';
+			// $username = 'qazwsxedcrfv123';
+			// $password = 'qwerty123';
+			// $db = 'b1ecomasher';
 
 			$cn = mysqli_connect($host, $username, $password, $db);
 			return $cn;

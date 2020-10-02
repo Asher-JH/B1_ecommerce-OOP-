@@ -1,4 +1,4 @@
 <?php 
 	require('../controllers/CartController.php');
-	CartController::checkout();
+	CartController::checkout($_GET);
  ?>
